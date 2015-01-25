@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Survive!</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<div id="perfLog" class="float-left"></div>
+		<div id="container">
+			<svg class="float-left" id="display" width="1024" height="720" style="background-color: #000;"></svg>
+			<div class="float-left" id="container-side">
+				Current spell: <span id="spell_name_holder"></span><br />
+				Kill count: <span id="kill_count_display">0</span><br /><br />
+				Advanced Mechanics:
+				<ul>
+					<li>Player speed: 300px/s</li>
+					<li>Player rotational speed: 180deg/s</li>
+					<li>Dot speed: 125px/s</li>
+					<li>Dot collision radius: 10px</li>
+					<li>Dot spawn rate: 1/s (70% chance of spawning)</li>
+					<li>Item spawn rate: 1 every 5 seconds</li>
+					<li>Item has 45% chance containing <span style="color:#ff0;">Blade</span>, 35% chance containing <span style="color:#f00;">Blast</span>, and 15% chance containing <span style="color:#00f;">Frost</span></li>
+					<li><span style="color:#ff0;">Blade</span> radius: 50px</li>
+					<li><span style="color:#ff0;">Blade</span> duration: 3s</li>
+					<li><span style="color:#f00;">Blast</span> travel distance: 800px over 2 seconds</li>
+					<li><span style="color:#00f;">Frost</span> blast radius: 200px over 0.7 seconds</li>
+					<li><span style="color:#00f;">Frost</span> duration 6 seconds</li>
+				</ul>
+			</div>
+			<div class="float-left" id="container-bottom"><a href="https://github.com/pciang">pciang</a></div>
+			<div class="no-float"></div>
+		</div>
+		<script src="js/Global.js" type="text/javascript"></script>
+		<script src="js/Item.js" type="text/javascript"></script>
+		<script src="js/Spell.js" type="text/javascript"></script>
+		<script src="js/Player.js" type="text/javascript"></script>
+		<script src="js/Dot.js" type="text/javascript"></script>
+		<script src="js/Game.js" type="text/javascript"></script>
+		<script src="js/main.js" type="text/javascript"></script>
+	</body>
+</html>

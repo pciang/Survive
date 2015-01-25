@@ -1,0 +1,45 @@
+html, body{
+	padding: 0;
+	margin: 0;
+}
+
+#perfLog{
+	width: 175px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	z-index: 9999;
+}
+
+#container{
+	width: 1224px;
+	margin: 0 auto;
+}
+
+#container-side{
+	width: 199px;
+	border-left: 1px solid #fff;
+	background-color: #000;
+	color: #fff;
+	height: 720px;
+}
+
+#container-bottom{
+	width: 1224px;
+	height: 48px;
+	border-left: 1px solid #ff;
+	text-align: center;
+}
+
+.float-left{
+	float: left;
+}
+
+.no-float{
+	clear: both;
+}
+
+#container-side ul{
+	margin: 0;
+}
