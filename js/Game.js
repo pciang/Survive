@@ -28,21 +28,27 @@ function Game(display, perfLog){
 	document.addEventListener('keydown', function (e){
 		switch(e.keyCode){
 			case 37:
+				e.preventDefault();
 				this.keys._37 = true;
 				break;
 			case 38:
+				e.preventDefault();
 				this.keys._38 = true;
 				break;
 			case 39:
+				e.preventDefault();
 				this.keys._39 = true;
 				break;
 			case 40:
+				e.preventDefault();
 				this.keys._40 = true;
 				break;
 			case 32:
+				e.preventDefault();
 				this.keys._32 = true;
 				break;
 			case 90:
+				e.preventDefault();
 				this.keys._90 = true;
 				break;
 		}
@@ -51,21 +57,27 @@ function Game(display, perfLog){
 	document.addEventListener('keyup', function (e){
 		switch(e.keyCode){
 			case 37:
+				e.preventDefault();
 				this.keys._37 = false;
 				break;
 			case 38:
+				e.preventDefault();
 				this.keys._38 = false;
 				break;
 			case 39:
+				e.preventDefault();
 				this.keys._39 = false;
 				break;
 			case 40:
+				e.preventDefault();
 				this.keys._40 = false;
 				break;
 			case 32:
+				e.preventDefault();
 				this.keys._32 = false;
 				break;
 			case 90:
+				e.preventDefault();
 				this.keys._90 = false;
 				break;
 		}
