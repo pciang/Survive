@@ -102,7 +102,8 @@ function Blast(game){
 			.translate(-this.center.x, -this.center.y);
 		
 		for(var i = 0; i < this.shape.points.length; ++i){
-			this.shape.points[i] = this.shape.points[i].matrixTransform(T);
+			// this.shape.points[i] = this.shape.points[i].matrixTransform(T);
+			this.shape.points.replaceItem(this.shape.points[i].matrixTransform(T), i);
 		}
 		this.center = this.center.matrixTransform(T);
 	}).bind(this)();
