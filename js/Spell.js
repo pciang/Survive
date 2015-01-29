@@ -46,7 +46,8 @@ function Blade(game){
 	
 	this.transform = function (T){
 		for(var i = 0, size = this.shape.points.length; i < size; ++i){
-			this.shape.points[i] = this.shape.points[i].matrixTransform(T);
+			// this.shape.points[i] = this.shape.points[i].matrixTransform(T);
+			this.shape.points.replaceItem(this.shape.points[i].matrixTransform(T), i);
 		}
 		this.center = this.center.matrixTransform(T);
 	};

@@ -3,6 +3,37 @@ var birthAnimMaxDur = 1,
 	deathAnimMaxDur = 0.5,
 	freezeMaxDur = 6;
 
+function getShade(x, y, x0, y0, x1, y1){
+	return (y1-y0)*x - (x1-x0)*y + x1*y0 - x0*y1;
+}
+
+/*
+	Point in polygon algorithm
+*/
+function PointInPolygon(point, polygon){
+	var windingNumber = 0;
+	for(var i = 0, pList = polygon.points, size = pList.length;
+		i < size; ++i){
+		var p2 = pList[i],
+			p1 = pList[i + 1 == size ? 0 : i + 1],
+			test0 = getShade(0, 0, p1.x, p1.y, p2.x, p2.y),
+			test1 = getShade(point.x, point.y, p1.x, p1.y, p2.x, p2.y);
+		
+		if((test0 < 0 && test1 >= 0)
+			|| (test0 > 0 && test1 <= 0)){
+			var shade2 = getShade(p2.x, p2.y, 0, 0, point.x, point.y),
+				shade1 = getShade(p1.x, p1.y, 0, 0, point.x, point.y);
+			if(shade2 <= 0 && shade1 > 0){
+				windingNumber += 1;
+			} else if(shade2 >= 0 && shade1 < 0){
+				windingNumber -= 1;
+			}
+		}
+	}
+	
+	return windingNumber;
+}
+
 function Dot(game, x, y){
 	this.game = game;
 	this.display = game.display;
@@ -27,32 +58,7 @@ function Dot(game, x, y){
 				shape = spell.shape;
 			
 			if(spell instanceof Blast || spell instanceof Blade){
-				var pList = shape.points,
-					len = pList.length,
-					wn = 0;
-				
-				// VECTOR CROSS PRODUCT
-				for(var j = 0;	j < len; ++j){
-					var v1 = diff(pList[j], this.center),
-						v2 = diff(pList[j == len - 1 ? 0 : j + 1], this.center),
-						d1 = Math.sqrt(v1.x * v1.x + v1.y * v1.y),
-						d2 = Math.sqrt(v2.x * v2.x + v2.y * v2.y),
-						crossProduct = cross(v1, v2),
-						dotProduct = dot(v1, v2),
-						asin = fastAsin(crossProduct / (d1 * d2)),
-						acos = fastAcos(dotProduct / (d1 * d2));
-					
-					if(acos < rightAngle){
-						totRad += asin;
-					} else if(asin < 0){
-						totRad += Math.PI + asin;
-					} else{
-						totRad += Math.PI - asin;
-					}
-				}
-				
-				for(; totRad > Math.PI; totRad -= fullRotation, ++wn);
-				if(wn & 1){
+				if(PointInPolygon(this.center, shape) > 0){
 					this.isAlive = false;
 					break;
 				}

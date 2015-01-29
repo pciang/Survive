@@ -41,18 +41,3 @@ function fastCosine(rad){
 	
 	return fastSine(rad);
 }
-
-function cross(v1, v2){
-	return v1.x * v2.y - v2.x * v1.y;
-}
-
-function diff(p1, p2){
-	return {
-		x: p1.x - p2.x,
-		y: p1.y - p2.y
-	};
-}
-
-function dot(v1, v2){
-	return v1.x * v2.x + v1.y * v2.y;
-}
