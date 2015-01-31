@@ -1,6 +1,8 @@
 var bladeMaxDur = 3,
-	blastMaxDur = 2,
-	frostMaxDur = 0.7;
+	blastMaxDur = 1,
+	blastSpeed = 700,
+	frostMaxDur = 0.3,
+	frostAOE = 300;
 
 function Spell(){
 }
@@ -86,13 +88,13 @@ function Blast(game){
 		this.display.createSVGMatrix().translate(this.center.x, this.center.y - 20)
 	));
 	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(this.center.x + 75, this.center.y + 10)
+		this.display.createSVGMatrix().translate(this.center.x + 80, this.center.y + 10)
 	));
 	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(this.center.x, this.center.y)
+		this.display.createSVGMatrix().translate(this.center.x, this.center.y + 5)
 	));
 	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(this.center.x - 75, this.center.y + 10)
+		this.display.createSVGMatrix().translate(this.center.x - 80, this.center.y + 10)
 	));
 	
 	(function (){
@@ -116,7 +118,7 @@ function Blast(game){
 	
 	this.dir_x = fastSine(this.player.rotation * toRadian);
 	this.dir_y = -fastCosine(this.player.rotation * toRadian);
-	this.speed = 400;
+	this.speed = blastSpeed;
 	this.blastDur = blastMaxDur;
 	
 	this.transform = function (T){
@@ -162,14 +164,14 @@ function Frost(game){
 	this.shape.setAttribute('r', this.r);
 	
 	this.frostDur = frostMaxDur;
-	this.frostExpansion = 200;
+	this.frostAOE = frostAOE;
 	this.update = function (ms){
 		var realDelta = Math.min(ms, this.frostDur);
 		this.frostDur -= realDelta;
 		
 		var dec = this.frostDur / frostMaxDur,
 			inc = 1 - dec;
-		this.shape.setAttribute('r', this.r = inc * this.frostExpansion);
+		this.shape.setAttribute('r', this.r = inc * this.frostAOE);
 		
 		if(this.frostDur < eps){
 			this.game.dump(this);

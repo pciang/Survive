@@ -1,5 +1,5 @@
-var maxNDots = 200,
-	dotSpawnPeriod = 1,
+var maxNDots = 400,
+	dotSpawnPeriod = 0.75,
 	itemSpawnPeriod = 5,
 	bladeSpawnChance = 0.45,
 	blastSpawnChance = bladeSpawnChance + 0.35,
@@ -129,7 +129,7 @@ function Game(display, perfLog){
 	// this.spawnItem(Frost, 100, 100);
 	
 	this.NDots = 0;
-	this.dotSpawnChance = 0.7;
+	this.dotSpawnChance = 1;
 	this.dotSpawnPeriod = dotSpawnPeriod;
 	
 	this.itemSpawnPeriod = itemSpawnPeriod;
