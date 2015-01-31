@@ -8,7 +8,8 @@ var eps = 1e-5,
 	spellNameHolder = document.getElementById('spell_name_holder'),
 	killCountDisplay = document.getElementById('kill_count_display'),
 	secPerUpdate = 1 / 120, // run updates every 1/120 s
-	msPerUpdate = 1000 / 120;
+	msPerUpdate = 1000 / 120,
+	date = new Date();
 
 function fastSine(rad){
 	var y = 1.2732395447351627 * rad - 0.4052847345693511 * rad * Math.abs(rad);

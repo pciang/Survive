@@ -6,7 +6,7 @@ var maxNDots = 200,
 	frostSpawnChance = blastSpawnChance + 0.20;
 
 function Game(display, perfLog){
-	this.last   = 0;
+	this.last   = date.getTime();
 	this.frames = 1;
 	this.perfLog = perfLog;
 	this.display = display;
