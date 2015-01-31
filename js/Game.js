@@ -6,6 +6,16 @@ var maxNDots = 200,
 	frostSpawnChance = blastSpawnChance + 0.20;
 
 function Game(display, perfLog){
+	
+	// anonymous function to clear all shapes in svg
+	(function (){
+		var child;
+		while(child = display.firstChild){
+			display.removeChild(child);
+		}
+	})();
+	
+	
 	this.last   = date.getTime();
 	this.frames = 1;
 	this.perfLog = perfLog;
@@ -202,9 +212,12 @@ function Game(display, perfLog){
 				this.secLeft = 0;
 			} else{
 				this.mainUpdate(ms);
-				
 				this.secLeft -= ms;
-				window.requestAnimationFrame(this.update.bind(this));
+				
+				
+				if(gameRequestId != null){
+					gameRequestId = window.requestAnimationFrame(this.update.bind(this));
+				}
 				return;
 			}
 		}
@@ -216,12 +229,18 @@ function Game(display, perfLog){
 		}
 		this.secLeft = secPerUpdate - realMs;
 		
-		window.requestAnimationFrame(this.update.bind(this));
+		if(gameRequestId != null){
+			gameRequestId = window.requestAnimationFrame(this.update.bind(this));
+		}
 	};
 	
 	this.stop = function (s){
-		throw new Error(s);
+		if(gameRequestId != null){
+			window.cancelAnimationFrame(gameRequestId);
+			gameRequestId = null;
+			alert('Final kill count: ' + this.playerKillCount);
+		}
 	};
 	
-	window.requestAnimationFrame(this.update.bind(this));
+	gameRequestId = window.requestAnimationFrame(this.update.bind(this));
 }
