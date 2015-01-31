@@ -184,15 +184,37 @@ function Game(display, perfLog){
 		this.dumpster = [];
 	};
 	
+	this.secLeft = 0;
 	this.update = function (t){
-		var delta = t - this.last;
+		var delta = t - this.last,
+			ms = delta / 1000;
 		if(this.perfLog){
 			var fps = 1000 / (t / this.frames++);
 			this.perfLog.textContent = 'fps: ' + fps;
 		}
 		this.last = t;
 		
-		this.mainUpdate(delta / 1000);
+		if(this.secLeft > 0){
+			if(this.secLeft < this.ms){
+				this.mainUpdate(this.secLeft);
+				
+				ms -= this.secLeft;
+				this.secLeft = 0;
+			} else{
+				this.mainUpdate(ms);
+				
+				this.secLeft -= ms;
+				window.requestAnimationFrame(this.update.bind(this));
+				return;
+			}
+		}
+		
+		var realMs = 0;
+		for(; ms > 0; ms -= realMs){
+			realMs = Math.min(ms, secPerUpdate);
+			this.mainUpdate(realMs);
+		}
+		this.secLeft = secPerUpdate - realMs;
 		
 		window.requestAnimationFrame(this.update.bind(this));
 	};
