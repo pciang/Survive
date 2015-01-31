@@ -167,7 +167,7 @@ function Dot(game, x, y){
 			return result;
 		}
 		
-		if(distance < this.radius){
+		if(distance < this.radius && this.isAlive){
 			this.game.stop('Player dies!');
 		}
 		

@@ -15,8 +15,8 @@ function Game(display, perfLog){
 		}
 	})();
 	
-	
-	this.last   = date.getTime();
+	this.startTime = (new Date()).getTime() - 1;
+	this.last   = this.startTime;
 	this.frames = 1;
 	this.perfLog = perfLog;
 	this.display = display;
@@ -29,7 +29,9 @@ function Game(display, perfLog){
 	
 	// container.appendChild(this.display);
 	
-	this.playerKillCount = 0;
+	this.playerKillCount         = 0;
+	killCountDisplay.textContent = 0;
+	spellNameHolder.textContent  = 0;
 	
 	this.keys = {
 		_37: false, _38: false, _39: false, _40: false, _32: false
@@ -100,9 +102,10 @@ function Game(display, perfLog){
 	this.dumpster = [];
 	
 	this.castSpell = function (s, game){
-		return this.spells[this.spells.push(
-				this.objects[this.objects.push(new s(game)) - 1]
-			) - 1];
+		var spell = new s(game);
+		this.objects.push(spell);
+		this.spells.push(spell);
+		return spell;
 	}
 	
 	this.spawnDot = function (x, y){
@@ -196,13 +199,16 @@ function Game(display, perfLog){
 	
 	this.secLeft = 0;
 	this.update = function (t){
-		var delta = t - this.last,
+		var now = (new Date()).getTime(),
+			delta = now - this.last,
 			ms = delta / 1000;
 		if(this.perfLog){
-			var fps = 1000 / (t / this.frames++);
+			var fps = 1000 / ((now - this.startTime) / this.frames++);
 			this.perfLog.textContent = 'fps: ' + fps;
 		}
-		this.last = t;
+		// console.log(now, delta, this.last, 'milliseconds: ', ms);
+		this.last = now;
+		
 		
 		if(this.secLeft > 0){
 			if(this.secLeft < this.ms){
