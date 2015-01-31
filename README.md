@@ -1,5 +1,7 @@
 ## Survive
+
 A simple game created with HTML5 SVG and JavaScript. Read some tips before playing the game :)
+
 Click [here](https://rawgit.com/pciang/Survive/master/index.html) to play now!
 
 ### Control
