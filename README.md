@@ -19,7 +19,7 @@ Click <a href="https://rawgit.com/pciang/Survive/master/index.html" target="_bla
 * The player now has its physics
   * Player's acceleration is 600px per sec^2
   * Player's deceleration is 350px per sec^2
-  * Player's maxed velocity is reduced from 325px/s to 250px/s
+  * Player's maxed velocity is reduced from 300px/s to 250px/s
   * Player's rotational speed is increased from 180deg/s to 270deg/s
 * Inverse trigonometric functions such as asin and acos are precomputed beforehand
 
