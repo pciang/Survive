@@ -4,29 +4,23 @@ function Player(game, x, y){
 	this.shape = document.createElementNS(SVGNS, 'polygon');
 	this.display.appendChild(this.shape);
 	
-	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(x, y - 10)
-	));
-	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(x + 5, y + 5)
-	));
-	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(x, y)
-	));
-	this.shape.points.appendItem(this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(x - 5, y + 5)
-	));
+	// clockwise polygon
+	addSVGPoint(this.display, this.shape, x, y - 10);
+	addSVGPoint(this.display, this.shape, x + 5, y + 5);
+	addSVGPoint(this.display, this.shape, x, y);
+	addSVGPoint(this.display, this.shape, x - 5, y + 5);
 	
-	this.center = this.display.createSVGPoint().matrixTransform(
-		this.display.createSVGMatrix().translate(x, y)
-	);
+	this.center = this.display.createSVGPoint();
+	this.center.x = x; this.center.y = y;
+	
 	this.shape.setAttribute('fill', 'none');
 	this.shape.setAttribute('stroke', '#09f');
 	this.shape.setAttribute('stroke-width', '1px');
 	
 	this.transform = function (T){
 		for(var i = 0, size = this.shape.points.length; i < size; ++i){
-			//this.shape.points[i] = this.shape.points[i].matrixTransform(T);
+			// point = point.matrixTransform(T) does not work in Firefox
+			// this.shape.points[i] = this.shape.points[i].matrixTransform(T);
 			this.shape.points.replaceItem(this.shape.points[i].matrixTransform(T), i);
 		}
 		this.center = this.center.matrixTransform(T);
@@ -54,10 +48,10 @@ function Player(game, x, y){
 				.translate(-this.center.x, -this.center.y);
 		
 		this.rotation += change;
-		while(this.rotation < -180){
+		if(this.rotation < -180){
 			this.rotation += 360;
 		}
-		while(180 < this.rotation){
+		if(180 < this.rotation){
 			this.rotation -= 360;
 		}
 		

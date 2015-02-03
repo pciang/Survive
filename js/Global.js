@@ -28,4 +28,10 @@ function fastCosine(rad){
 	return fastSine(rad);
 }
 
+function addSVGPoint(svg, shape, x, y){
+	shape.points.appendItem(svg.createSVGPoint().matrixTransform(
+		svg.createSVGMatrix().translate(x, y)
+	));
+}
+
 alert('Press up, left, and right button to move.\nPress \'Z\' button to use spell!\nPress spacebar button to start a new game or restart a game!\n\nFinally, play this game in full-screen mode (press F11).');
