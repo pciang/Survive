@@ -68,7 +68,7 @@ function Player(game, x, y){
 	this.velocity = 0;
 	this.max_velocity = 250;
 	this.acceleration = 600;
-	this.deceleration = 250;
+	this.deceleration = 350;
 	
 	this.decelerate = function (ms){
 		this.velocity -= ms * this.deceleration;
