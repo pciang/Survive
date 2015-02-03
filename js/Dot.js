@@ -1,7 +1,8 @@
-var birthAnimMaxDur = 1,
+var birthAnimMaxDur = 2,
 	proximity = 1,
 	deathAnimMaxDur = 0.5,
-	freezeMaxDur = 6;
+	freezeMaxDur = 6,
+	dotCollisionRadius = 8;
 
 function getShade(x, y, x0, y0, x1, y1){
 	return (y1-y0)*x - (x1-x0)*y + x1*y0 - x0*y1;
@@ -48,8 +49,6 @@ function Dot(game, x, y){
 	
 	this.display.appendChild(this.shape);
 	
-	this.radius = 10;
-	
 	this.freezeSpell = null;
 	this.checkSpells = function (ms){
 		for(var i = 0, size = this.game.spells.length; i < size; ++i){
@@ -94,18 +93,20 @@ function Dot(game, x, y){
 		this.freezeDur -= realDelta;
 		var dec = this.freezeDur / freezeMaxDur,
 			inc = 1 - dec,
-			r = Math.max(255 * (2 * dec) | 0, 0),
-			g = Math.min(255 * (2 * inc) | 0, 255),
-			b = Math.min(255 * (2 * inc) | 0, 255);
+			r = ('0' + Math.max(255 * (1 - 2 * inc) | 0, 0).toString(16)).slice(-2),
+			g = ('0' + Math.min(255 * (2 * inc) | 0, 255).toString(16)).slice(-2),
+			b = g;
 		
-		this.shape.setAttribute('fill', 'rgb(' + r + ', ' + g + ', ' + b + ')');
-		this.shape.setAttribute('stroke', 'rgb(' + r + ', 255,' + b + ')');
+		this.shape.setAttribute('fill', '#' + r + g + b);
+		this.shape.setAttribute('stroke', '#' + r + 'ff' + b);
 		this.shape.setAttribute('fill-opacity', 0.75 + 0.25 * dec);
+		this.shape.setAttribute('stroke-opacity', 0.75 + 0.25 * dec);
 		
 		if(this.freezeDur < eps){
 			this.shape.setAttribute('fill', '#f00');
 			this.shape.setAttribute('stroke', '#fff');
 			this.shape.setAttribute('fill-opacity', 1);
+			this.shape.setAttribute('stroke-opacity', 1);
 			this.freezeSpell = null;
 			
 			return {
@@ -167,7 +168,7 @@ function Dot(game, x, y){
 			return result;
 		}
 		
-		if(distance < this.radius && this.isAlive){
+		if(distance < dotCollisionRadius && this.isAlive){
 			this.game.stop('Player dies!');
 		}
 		
@@ -185,6 +186,11 @@ function Dot(game, x, y){
 		var	dec = this.birthAnimDur / birthAnimMaxDur,
 			inc = 1 - dec;
 		
+		var r = ('0' + (inc * 255 | 0).toString(16)).slice(-2),
+			g = ('0' + (dec * 255 | 0).toString(16)).slice(-2),
+			b = g;
+		
+		this.shape.setAttribute('fill', '#' + r + g + b);
 		this.shape.setAttribute('fill-opacity', inc);
 		this.shape.setAttribute('r', 5 * inc);
 		this.shape.setAttribute('stroke-width', 2 * inc);

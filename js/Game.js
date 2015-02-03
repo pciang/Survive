@@ -31,7 +31,7 @@ function Game(display, perfLog){
 	
 	this.playerKillCount         = 0;
 	killCountDisplay.textContent = 0;
-	spellNameHolder.textContent  = 0;
+	spellNameHolder.textContent  = '';
 	
 	this.keys = {
 		_37: false, _38: false, _39: false, _40: false, _32: false

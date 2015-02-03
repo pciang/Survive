@@ -10,14 +10,27 @@ function Item(contain, game, x, y){
 	this.shape = document.createElementNS(SVGNS, 'text');
 	
 	this.shape.textContent = '?';
-	this.shape.setAttribute('x', x);
-	this.shape.setAttribute('y', y);
+	this.shape.setAttribute('x', x - 12);
+	this.shape.setAttribute('y', y + 10);
 	this.shape.setAttribute('fill', '#fff');
 	this.shape.setAttribute('font-family', 'Condolas, Courier New, Courier');
-	this.shape.setAttribute('font-size', '24px');
+	this.shape.setAttribute('font-size', '36px');
 	this.display.appendChild(this.shape);
 	
-	this.radius = 20;
+	// marker
+	/*
+	(function (){
+		var marker = document.createElementNS(SVGNS, 'circle');
+		marker.setAttribute('r', 16);
+		marker.setAttribute('cx', x);
+		marker.setAttribute('cy', y);
+		marker.setAttribute('fill', '#f00');
+		marker.setAttribute('fill-opacity', 0.5);
+		game.display.appendChild(marker);
+	}).bind(this)();
+	*/
+	
+	this.radius = 16;
 	this.contain = contain;
 	
 	this.lifetime = itemMaxLifetime;
