@@ -103,7 +103,7 @@ function Game(display, perfLog){
 	
 	this.castSpell = function (s, game){
 		var spell = new s(game);
-		this.objects.push(spell);
+		this.objects.splice(1, 0, spell);
 		this.spells.push(spell);
 		return spell;
 	}

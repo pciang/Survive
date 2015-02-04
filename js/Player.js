@@ -13,8 +13,8 @@ function Player(game, x, y){
 	this.center = this.display.createSVGPoint();
 	this.center.x = x; this.center.y = y;
 	
-	this.shape.setAttribute('fill', 'none');
-	this.shape.setAttribute('stroke', '#09f');
+	this.shape.setAttribute('fill', '#ccc');
+	this.shape.setAttribute('stroke', '#ccc');
 	this.shape.setAttribute('stroke-width', '1px');
 	
 	this.transform = function (T){

@@ -12,7 +12,7 @@ function Item(contain, game, x, y){
 	this.shape.textContent = '?';
 	this.shape.setAttribute('x', x - 12);
 	this.shape.setAttribute('y', y + 10);
-	this.shape.setAttribute('fill', '#fff');
+	this.shape.setAttribute('fill', '#ff0');
 	this.shape.setAttribute('font-family', 'Condolas, Courier New, Courier');
 	this.shape.setAttribute('font-size', '36px');
 	this.display.appendChild(this.shape);
