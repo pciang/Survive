@@ -26,7 +26,7 @@ function Player(game, x, y){
 		this.center = this.center.matrixTransform(T);
 	};
 	
-	this.rotationalSpeed = 270;
+	this.rotationalSpeed = 225;
 	this.rotation = 0;
 	
 	this.turn = function (ms, direction){
